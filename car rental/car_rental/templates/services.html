@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Car Rental System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 0px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 50px 0;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .service-item {
+      width: 300px;
+      background-color: #f1f1f1;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .service-item img {
+      width: 150px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .service-item h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .service-item p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Car Rental System</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+            <li><a href="{{ url_for('booking') }}">Booking</a></li>
+            <li><a href="{{ url_for('register') }}">Sign Up</a></li>
+        </ul>
+        
+    </nav>
+  </header>
+
+  <section class="services">
+    <div class="container">
+      <div class="service-item">
+        <img src="https://www.indiantelevision.com/sites/default/files/styles/smartcrop_800x800/public/images/mam-images/2014/09/27/mam%20mam%20research.jpg?itok=mFzFjPSV" alt="Service 1">
+        <h3>Wide Variety of Brands</h3>
+        <p>Choose from a diverse range of vehicles from various brands. We have something for every need and budget.</p>
+      </div>
+      <div class="service-item">
+        <img src="https://cdn-icons-png.flaticon.com/128/5581/5581212.png" alt="Service 2">
+        <h3>Easy Online Booking</h3>
+        <p>Our user-friendly online booking system allows you to reserve your vehicle with just a few clicks. It's quick, convenient, and hassle-free.</p>
+      </div>
+      <div class="service-item">
+        <img src="https://www.marketing91.com/wp-content/uploads/2016/08/images.jpg" alt="Service 3">
+        <h3>Excellent Customer Service</h3>
+        <p>Our dedicated customer service team is available round the clock to assist you with any queries or concerns. We strive to ensure your rental experience is seamless and enjoyable.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Car Rental System</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #007bff;
+        }
+        .invoice-details {
+            margin-bottom: 20px;
+        }
+        .invoice-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .invoice-details th, .invoice-details td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .car-details {
+            margin-bottom: 20px;
+        }
+        .car-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .car-details th, .car-details td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .total {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .total h2 {
+            color: #007bff;
+        }
+        .notes {
+            margin-top: 20px;
+        }
+        .notes h2 {
+            color: #007bff;
+        }
+        .notes p {
+            line-height: 1.6;
+        }
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .print-button {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #434344;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+        }
+        .print-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="company-name">WanderWheels</div>
+            <h1>Invoice</h1>
+        </div>
+        <div class="invoice-details">
+            <table>
+                <tr>
+                    <th>Booking ID:</th>
+                    <td>{{ booking._id }}</td>
+                </tr>
+                <tr>
+                    <th>Car Name:</th>
+                    <td>{{ booking.car_name }}</td>
+                </tr>
+                <tr>
+                    <th>Rent Per Day:</th>
+                    <td>Rs {{ booking.rent_per_day }}</td>
+                </tr>
+                <tr>
+                    <th>Pickup Date:</th>
+                    <td>{{ booking.pickup_date }}</td>
+                </tr>
+                <tr>
+                    <th>Return Date:</th>
+                    <td>{{ booking.return_date }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="total">
+            <h2>Total Amount: Rs <span id="totalAmount"></span></h2>
+        </div>
+    </div>
+    <button class="print-button" onclick="printInvoice()">Print Invoice</button>
+
+    <script>
+        function calculateTotal() {
+            var rentPerDay = parseFloat("{{ booking.rent_per_day }}");
+            var pickupDate = new Date("{{ booking.pickup_date }}");
+            var returnDate = new Date("{{ booking.return_date }}");
+
+            var timeDifference = returnDate.getTime() - pickupDate.getTime();
+            var days = Math.ceil(timeDifference / (1000 * 3600 * 24));
+
+            var totalAmount = rentPerDay * days;
+
+            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+        }
+
+        function printInvoice() {
+            calculateTotal();
+            window.print();
+        }
+
+        calculateTotal();
+    </script>
+</body>
+</html>

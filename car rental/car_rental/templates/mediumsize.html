@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WheelWanders - Compact Cars</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    h1{
+      text-align: center;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    h2 {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Insert your preferred font family */
+  font-size:medium; /* Insert your preferred font size */
+  text-align: center; 
+}
+
+    .car-box {
+      width: calc(33.33% - 20px); /* Adjust width to fit three boxes in a row */
+      margin: 10px;
+      padding: 20px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-align: center;
+    }
+    .car-box:hover {
+      background-color: #8f8c8c;
+    }
+    .car-box img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #686767;
+    }
+  </style>
+</head>
+<body>
+    <button class="back-button" onclick="redirectToHome()">Back</button>
+      <h1>MIDSIZE CARS</h1>
+  <div class="container">
+    <div class="car-box" onclick="redirectToTerms('Toyota Corolla Altis',15000)">
+      <img src="https://www.carandbike.com/_next/image?url=https%3A%2F%2Fmfcwl-vehicle-live-web-images.s3.us-west-2.amazonaws.com%2Flive_web_images%2Fusedcarsimg%2Fmfc%2F860%2F519019%2Fcover_image-20220705135150.jpg&w=750&q=75" alt="Car 1"> <!-- Insert Image Here -->
+      <h2>Toyota Corolla Altis</h2>
+      <p>Rent per day: Rs 8000</p>
+
+    </div>
+    <div class="car-box" onclick="redirectToTerms('Hyundai Elantra',15000)">
+      <img src="https://images.garipoint.com/get_new_car_images.php?width=580&height=320&path=model_images/hyundai/elantra/hyundai-elantra-Polar-White.jpg" alt="Car 2"> <!-- Insert Image Here -->
+      <h2>Hyundai Elantra</h2>
+      <p>Rent per day: Rs 8100</p>
+
+    </div>
+    <div class="car-box" onclick="redirectToTerms('Maruti Suzuki Dzire',15000)">
+      <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/45691/dzire-exterior-right-front-three-quarter-3.jpeg?isig=0&q=80" alt="Car 3"> <!-- Insert Image Here -->
+      <h2>Maruti Suzuki Dzire</h2>
+      <p>Rent per day: Rs 6500</p>
+
+    </div>
+    <div class="car-box" onclick="redirectToTerms('Honda Amaze',15000)">
+      <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/45951/amaze-exterior-right-front-three-quarter-3.jpeg?isig=0&q=80" alt="Car 4"> <!-- Insert Image Here -->
+      <h2>Honda Amaze</h2>
+      <p>Rent per day: Rs 7800</p>
+
+    </div>
+    <div class="car-box" onclick="redirectToTerms('Hyundai Verna',15000)">
+      <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/121943/verna-exterior-right-front-three-quarter-101.jpeg?isig=0&q=80" alt="Car 5"> <!-- Insert Image Here -->
+      <h2>Hyundai Verna</h2>
+      <p>Rent per day: Rs 7900</p>
+
+    </div>
+    <div class="car-box" onclick="redirectToTerms('Skoda Rapid',15000)">
+        <img src="https://imgd.aeplcdn.com/664x374/cw/ec/23512/Skoda-Rapid-Right-Front-Three-Quarter-83269.jpg?v=201711021421&q=80" alt="Car 6"> <!-- Insert Image Here -->
+        <h2>Skoda Rapid</h2>
+        <p>Rent per day: Rs 8100</p>
+
+      </div>
+  </div>
+    <script>
+        function redirectToHome() {
+            window.location.href = "{{ url_for('booking') }}";
+        }
+        function redirectToTerms(carName, rentPerDay) {
+    var pickupDate = prompt("Enter Pickup Date (YYYY-MM-DD):");
+    var returnDate = prompt("Enter Return Date (YYYY-MM-DD):");
+
+    if (pickupDate && returnDate) {
+        var data = {
+            carName: carName,
+            rentPerDay: rentPerDay,
+            pickupDate: pickupDate,
+            returnDate: returnDate
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "{{ url_for('add_car_to_db') }}", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.href = "{{ url_for('terms') }}";
+            }
+        };
+        
+        // Include user's email in the data sent to the backend
+        var userEmail = "{{ session['email'] }}";
+        data.email = userEmail;
+
+        xhr.send(JSON.stringify(data));
+    }
+}
+
+           </script>    
+</body>
+</html>

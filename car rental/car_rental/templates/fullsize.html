@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WheelWanders - Fullsize Cars</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    h1{
+      text-align: center;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    h2 {
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: medium;
+      text-align: center; 
+    }
+
+    .car-box {
+      width: calc(33.33% - 20px);
+      margin: 10px;
+      padding: 20px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-align: center;
+    }
+    .car-box:hover {
+      background-color: #8f8c8c;
+    }
+    .car-box img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #686767;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    .modal-content input {
+      width: calc(100% - 20px);
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .modal-content button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+    .modal-content button:hover {
+      background-color: #686767;
+    }
+  </style>
+</head>
+<body>
+    <button class="back-button" onclick="redirectToHome()">Back</button>
+    <h1>FULLSIZE CARS</h1>
+    <div class="container">
+        <div class="car-box" onclick="openModal('Mahindra Xylo', 8500)">
+            <img src="https://imgd.aeplcdn.com/1280x720/cw/ec/31432/Mahindra-Xylo-Exterior-109406.jpg?wm=0&q=80" alt="Car 1">
+            <h2>Mahindra Xylo</h2>
+            <p>Rent per day: Rs 8500</p>
+        </div>
+        <div class="car-box" onclick="openModal('Maruti Suzuki Ertiga', 8100)">
+            <img src="https://imgd.aeplcdn.com/1056x594/n/c6es93a_1572125.jpg?q=80" alt="Car 2">
+            <h2>Maruti Suzuki Ertiga</h2>
+            <p>Rent per day: Rs 8100</p>
+        </div>
+        <div class="car-box" onclick="openModal('Renault Triber', 8500)">
+            <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/141145/triber-right-front-three-quarter-2.jpeg?isig=0&q=80" alt="Car 3">
+            <h2>Renault Triber</h2>
+            <p>Rent per day: Rs 8500</p>
+        </div>
+        <div class="car-box" onclick="openModal('Toyota Innova Crysta', 9000)">
+            <img src="https://imgd.aeplcdn.com/664x374/cw/specialVersions/6186.jpg?v=20190304024509&q=80" alt="Car 4">
+            <h2>Toyota Innova Crysta</h2>
+            <p>Rent per day: Rs 9000</p>
+        </div>
+        <div class="car-box" onclick="openModal('Mahindra Marazzo', 8900)">
+            <img src="https://imgd.aeplcdn.com/1280x720/n/cw/ec/26944/marazzo-2018-2020-exterior-right-front-three-quarter-2.jpeg?q=80" alt="Car 5">
+            <h2>Mahindra Marazzo</h2>
+            <p>Rent per day: Rs 8900</p>
+        </div>
+        <div class="car-box" onclick="openModal('Tata Hexa', 8000)">
+            <img src="https://imgd.aeplcdn.com/1280x720/cw/ec/38637/Tata-Hexa-Right-Front-Three-Quarter-149701.jpg?wm=0&q=80" alt="Car 6">
+            <h2>Tata Hexa</h2>
+            <p>Rent per day: Rs 8000</p>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Enter Details</h2>
+            <form id="bookingForm">
+                <input type="hidden" id="carName" name="carName">
+                <input type="hidden" id="rentPerDay" name="rentPerDay">
+                <label for="pickupDate">Pickup Date:</label>
+                <input type="date" id="pickupDate" name="pickupDate" required>
+                <label for="returnDate">Return Date:</label>
+                <input type="date" id="returnDate" name="returnDate" required>
+                <button type="button" onclick="submitForm()">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function redirectToHome() {
+            window.location.href = "{{ url_for('booking') }}";
+        }
+
+        function openModal(carName, rentPerDay) {
+            document.getElementById('carName').value = carName;
+            document.getElementById('rentPerDay').value = rentPerDay;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function submitForm() {
+            var form = document.getElementById('bookingForm');
+            var data = {
+                carName: form.carName.value,
+                rentPerDay: form.rentPerDay.value,
+                pickupDate: form.pickupDate.value,
+                returnDate: form.returnDate.value,
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "{{ url_for('add_car_to_db') }}", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    window.location.href = "/terms?booking_id=" + response.booking_id;  
+                } else {
+                    console.error("Error:", response.message);
+                }
+            } else {
+                console.error("Error:", xhr.status);
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+}
+    </script>
+    </body>
+</html>

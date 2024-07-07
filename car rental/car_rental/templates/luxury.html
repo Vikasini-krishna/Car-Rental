@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WheelWanders - Luxury Cars</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    h1{
+      text-align: center;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    h2 {
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: medium;
+      text-align: center; 
+    }
+
+    .car-box {
+      width: calc(33.33% - 20px);
+      margin: 10px;
+      padding: 20px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-align: center;
+    }
+    .car-box:hover {
+      background-color: #8f8c8c;
+    }
+    .car-box img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #686767;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+    .modal-content input {
+      width: calc(100% - 20px);
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .modal-content button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+    .modal-content button:hover {
+      background-color: #686767;
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="redirectToHome()">Back</button>
+  <h1>LUXURY CARS</h1>
+  <div class="container">
+    <div class="car-box" onclick="openModal('Mercedes-Benz S-Class', 15000)">
+      <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/48067/s-class-exterior-right-front-three-quarter-9.jpeg?isig=0&q=80" alt="Mercedes-Benz S-Class">
+      <h2>Mercedes-Benz S-Class</h2>
+      <p>Rent per day: Rs 15,000</p>
+    </div>
+    <div class="car-box" onclick="openModal('BMW 7 Series', 15100)">
+      <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/132513/new-7-series-exterior-left-front-three-quarter-2.jpeg?isig=0&q=80" alt="BMW 7 Series">
+      <h2>BMW 7 Series</h2>
+      <p>Rent per day: Rs 15,100</p>
+    </div>
+    <div class="car-box" onclick="openModal('Audi A8', 16500)">
+      <img src="https://imgd-ct.aeplcdn.com/1056x660/n/0e7ju3a_1590675.jpg?q=80" alt="Audi A8">
+      <h2>Audi A8</h2>
+      <p>Rent per day: Rs 16,500</p>
+    </div>
+    <div class="car-box" onclick="openModal('Jaguar XJ', 17000)">
+      <img src="https://imgd.aeplcdn.com/1280x720/cw/ec/21686/Jaguar-XJ-L-Right-Front-Three-Quarter-64990.jpg?wm=0&t=175455253&t=175455253&q=80" alt="Jaguar XJ">
+      <h2>Jaguar XJ</h2>
+      <p>Rent per day: Rs 17,000</p>
+    </div>
+    <div class="car-box" onclick="openModal('Lexus LS', 20000)">
+      <img src="https://imgd.aeplcdn.com/664x374/n/cw/ec/28191/ls-exterior-right-front-three-quarter-3.jpeg?isig=0&q=80" alt="Lexus LS">
+      <h2>Lexus LS</h2>
+      <p>Rent per day: Rs 20,200</p>
+    </div>
+    <div class="car-box" onclick="openModal('Porsche Panamera', 20500)">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOsFJmmg-vq-rf5fXkCTVRVYLal6br9uKMwZWdVFYRag&s" alt="Porsche Panamera">
+      <h2>Porsche Panamera</h2>
+      <p>Rent per day: Rs 20,500</p>
+    </div>
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2>Enter Details</h2>
+      <form id="bookingForm">
+        <input type="hidden" id="carName" name="carName">
+        <input type="hidden" id="rentPerDay" name="rentPerDay">
+        <label for="pickupDate">Pickup Date:</label>
+        <input type="date" id="pickupDate" name="pickupDate" required>
+        <label for="returnDate">Return Date:</label>
+        <input type="date" id="returnDate" name="returnDate" required>
+        <button type="button" onclick="submitForm()">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function redirectToHome() {
+      window.location.href = "{{ url_for('booking') }}";
+    }
+
+    function openModal(carName, rentPerDay) {
+      document.getElementById('carName').value = carName;
+      document.getElementById('rentPerDay').value = rentPerDay;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function submitForm() {
+      var form = document.getElementById('bookingForm');
+      var data = {
+        carName: form.carName.value,
+        rentPerDay: form.rentPerDay.value,
+        pickupDate: form.pickupDate.value,
+        returnDate: form.returnDate.value,
+      };
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "{{ url_for('add_car_to_db') }}", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    window.location.href = "/terms?booking_id=" + response.booking_id;  
+                } else {
+                    console.error("Error:", response.message);
+                }
+            } else {
+                console.error("Error:", xhr.status);
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+}
+    </script>
+    </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Bill</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        .terms {
+            margin-top: 20px;
+        }
+        .terms h2 {
+            margin-bottom: 10px;
+        }
+        .terms p {
+            margin: 0;
+        }
+        .accept-terms label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .confirm-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.5; /* initially set opacity to 0.5 */
+        }
+        .confirm-button:hover {
+            background-color: #0056b3;
+        }
+        .confirm-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .booking-id {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WanderWheels</h1>
+        </header>
+        <h2>Car Rental Bill</h2>
+        <div class="terms">
+            <h2>Terms and Conditions</h2>
+            <p>1. Payment is due upon return of the vehicle.</p>
+            <p>2. The renter is responsible for any damages to the vehicle during the rental period.</p>
+            <p>3. Late returns may incur additional charges.</p>
+            <p>4. A maximum of 300 km per day is allowed. Exceeding this limit will incur extra charges.</p>
+            <!-- Add more terms and conditions as needed -->
+        </div>
+
+        <div class="accept-terms">
+            <label>
+                <input type="checkbox" id="accept-terms-checkbox" onchange="toggleConfirmButton(this)"> I accept the Terms and Conditions
+            </label>
+        </div>
+        <button class="confirm-button" id="confirm-button" disabled onclick="confirmBooking('{{ booking_id }}')">Confirm Booking</button>
+        
+        <div id="booking-id-display" class="booking-id" style="display: none;">
+            Your Booking ID is: <span id="booking-id"></span>
+        </div>
+    </div>
+
+    <script>
+        function toggleConfirmButton(checkbox) {
+            var confirmButton = document.getElementById('confirm-button');
+            confirmButton.disabled = !checkbox.checked;
+            confirmButton.style.opacity = checkbox.checked ? '1' : '0.5';
+        }
+
+        function confirmBooking(bookingId) {
+            // Display the booking ID
+            var bookingIdDisplay = document.getElementById('booking-id-display');
+            var bookingIdSpan = document.getElementById('booking-id');
+            bookingIdSpan.textContent = bookingId;
+            bookingIdDisplay.style.display = 'block';
+
+            // Redirect after a short delay
+            setTimeout(function() {
+                window.location.href = "/invoice/" + bookingId;
+            }, 3000); // 3 seconds delay
+        }
+    </script>
+</body>
+</html>

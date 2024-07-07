@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Rental Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .container {
+      width: 400px;
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    h1 {
+      margin-top: 0;
+      text-align: center;
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+      font-size:xx-large;
+    }
+    h2 {
+      margin-top: 0;
+      text-align: center;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size:medium;
+    }
+    h3 {
+      margin-top: 0;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 15px;
+    }
+    input[type="date"],
+    select {
+      width: calc(100% - 12px);
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    input[type="submit"]:hover {
+      background-color: #686767;
+    }
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #686767;
+    }
+    .back-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .back-button:hover {
+      background-color: #686767;
+    }
+
+  </style></head>
+<body>
+  <button class="back-button" onclick="redirectToHome()">Back</button>
+
+  <h1>WheelWanders</h1>
+  <h2>Book Your Car Now !!</h2>
+  <div class="container">
+    <h3>Car Rental Booking</h3>
+    <form id="bookingForm" method="post" action="{{ url_for('booking') }}">
+        <label for="carType">Car Type:</label>
+        <select id="carType" name="carType">
+            <option value="Economy">Economy</option>
+            <option value="Compact">Compact</option>
+            <option value="Fullsize">Fullsize</option>
+            <option value="SUV">SUV</option>
+            <option value="Luxury">Luxury</option>
+        </select>
+        <input type="submit" value="Continue Booking">
+    </form>
+</div>
+
+<script>
+    function redirectToHome() {
+      window.location.href = "{{ url_for('index') }}";
+    }
+  
+    document.getElementById("bookingForm").addEventListener("submit", function(event) {
+      // Prevent default form submission
+      event.preventDefault();
+  
+      var carType = document.getElementById("carType").value;
+      if (carType.toLowerCase() === 'economy') {
+        window.location.href = "{{ url_for('economy') }}"; 
+      } 
+      else if (carType.toLowerCase() === 'compact') {
+        window.location.href = "{{ url_for('compact') }}"; 
+      } 
+      else if (carType.toLowerCase() === 'fullsize') {
+        window.location.href = "{{ url_for('fullsize') }}"; 
+      } 
+      else if (carType.toLowerCase() === 'luxury') {
+        window.location.href = "{{ url_for('luxury') }}"; 
+      }  
+      else if (carType.toLowerCase() === 'suv') {
+        window.location.href = "{{ url_for('suv') }}"; 
+      } 
+      else {
+        window.location.href = "/car_list/" + carType.toLowerCase();
+      }
+    });
+  </script>
+  
+</body>
+</html>

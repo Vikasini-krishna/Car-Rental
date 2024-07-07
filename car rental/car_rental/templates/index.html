@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Rental System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 0px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0; 
+      margin-bottom: 0; 
+    }
+    #car-image {
+      background-image: url('https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/newscms/2019_13/2798361/190325-rental-cars-cs-229p.jpg');
+      background-size: cover;
+      height: 100vh;
+      display: flex; 
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    #car-image .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    #car-image .content {
+      position: relative;
+      z-index: 2;
+      padding-top: 20px;
+    }
+
+    nav {
+      padding: 0;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin-right: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    section {
+      padding: 50px 0;
+      text-align: center;
+      margin-top: 0; 
+      margin-bottom: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: -100px; 
+    }
+
+    .about-us, .car-rental-content {
+      flex: 1; 
+      padding: 20px;
+      color: black;
+    }
+
+    .about-us {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: flex-start; /* Align to the start (left) */
+  text-align: left; /* Align text to the left */
+}
+
+.about-us-content {
+  max-width: 50%; 
+  text-align: left; 
+}
+
+
+
+    .about-us h2 {
+      margin-top: 0;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Car Rental System</h1>
+        <nav>
+          <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="{{ url_for('services') }}">Services</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('cancel_booking') }}">Cancel Booking</a></li>
+        <li><a href="{{ url_for('update_booking') }}">Update Booking</a></li>
+        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+        </nav>
+        
+      </ul>
+    </nav>
+  </header>
+
+  <section id="car-image">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>Welcome to our Car Rental Service</h2>
+      <p>Rent your dream car at affordable prices!</p>
+    </div>
+  </section>
+
+  <section class="about-us" id="about">
+    <div class="about-us-content">
+      <h2>About Us</h2>
+      <p>We are a passionate team dedicated to providing a smooth and convenient car rental experience. We offer a wide variety of vehicles to suit your needs, from compact cars for city driving to spacious SUVs for road trips. Our commitment to excellent customer service ensures you have a stress-free rental process.</p>
+      <p>At Car Rental System, we prioritize customer satisfaction above all else. Our experienced staff are here to assist you with any inquiries and help you find the perfect vehicle for your needs. Whether you're planning a family vacation, a business trip, or a weekend getaway, we have the right car for you.</p>
+      <p>With our easy online booking system, reserving a car has never been simpler. Browse our selection of vehicles, choose your pick-up and drop-off locations, and book your car in just a few clicks. We offer flexible rental options, competitive rates, and excellent customer service to ensure your rental experience is hassle-free.</p>
+      <p>Experience the convenience and reliability of Car Rental System today. Rent your dream car and enjoy the freedom to explore the open road.</p>
+    </div>
+
+  </section>
+
+  <section id="services">
+    <div class="container">
+    
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Car Rental System</p>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const aboutLink = document.querySelector('a[href="#about"]');
+      aboutLink.addEventListener("click", function(event) {
+        event.preventDefault();
+        const aboutSection = document.getElementById("about");
+        aboutSection.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+  </script>
+</body>
+</html>
